@@ -12,10 +12,19 @@
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usepackage{standalone}
-\usepackage[americanresistors,americaninductors]{circuitikz}
+\usepackage[americanresistors,americaninductors]{circuitikz} % For circuit elements
+\usepackage{tikz-dimline} % For dimensional drawing
 \usetikzlibrary{positioning}
 \usetikzlibrary{arrows}
 \usepackage{subfig}
+% The following is done to hide ugly color boces around the links
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
 % \usepackage{pdfsync} % use to back search tex lines from pdf
 % pdflatex -synctex=-1
 % \usepackage{mathptmx} % Times new Roman
@@ -61,6 +70,7 @@
     \begin{align}
       \dv{}{z}{V(z)} ={}& -jk_z Z I(z),
       \label{eq:TL_V}\\
+      %
       \dv{}{z}{I(z)} ={}& -jk_z Y V(z).
       \label{eq:TL_I}
     \end{align}
@@ -96,6 +106,7 @@ For a transmission line of infinite extent excited by a current source of unit a
   \begin{align}
     V(z) ={}& \frac{Z}{2} e^{-jk_z \left|z-z'\right| },
     \label{eq:TL_source_V}\\
+    %
     I(z) ={}& \pm \frac{1}{2} e^{-jk_z \left|z-z'\right|}.
     \label{eq:TL_source_I}
   \end{align}
@@ -106,7 +117,14 @@ The $+$ sign in (\ref{eq:TL_source_I}) is for $z > z'$ and vice versa. The disco
 
 \section{Multi-section Transmission Line}
 
-We now consider a multi-section transmission line excited by a unit strength current source located in the $n^{th}$ section as illustrated in Fig. ().
+We now consider a multi-section transmission line excited by a unit strength current source located in the $n^{th}$ section as illustrated in Fig. \ref{fig:TL}.
+
+\begin{figure}[h!]
+  \centering
+  \includestandalone[width=1\textwidth]{figures/tl}
+  \caption{Current Source in a multi-section transmission line}
+  \label{fig:TL}
+\end{figure}
 
 The voltage and current expressions in any section now consist of a particular solution due to source and a homogeneous solution accounting for boundaries of the section. Due to a current source at $z = z'$, the solutions at any point $z$ in the $n^{th}$ section with propagation constant $k_{zn}$ become:
 
@@ -114,6 +132,7 @@ The voltage and current expressions in any section now consist of a particular s
   \begin{align}
     V_i(z, z') ={}& \frac{Z}{2} e^{-jk_z \left|z-z'\right| } + A_n e^{-j k_{zn} z } + B_n e^{j k_{zn} z},
     \label{eq:multi_V}\\
+    %
     I_i(z, z') ={}& \pm \frac{1}{2} e^{-jk_z \left|z-z'\right|} + A_n e^{-j k_{zn} z } - B_n e^{j k_{zn} z}.
     \label{eq:multi_I}
   \end{align}
@@ -126,6 +145,7 @@ In order to find the unknowns $A_n$ and $B_n$, we invoke the boundary conditions
   \begin{align}
     \frac{V_i(z_n,z')}{I_i(z_n,z')} ={}& -\overleftarrow{Z_n} , \quad z = z_n
     \label{eq:BC_left}\\
+    %
     \frac{V_i(z_{n+1},z')}{I_i(z_{n+1},z')} ={}& \overrightarrow{Z_n} ,\quad  z = z_{n+1}.
     \label{eq:BC_right}
   \end{align}
@@ -139,6 +159,7 @@ From (\ref{eq:multi}) and (\ref{eq:BC}), we obtain:
     \left( Z_n - \overleftarrow{Z_n} \right) e^{-j k_{zn} (z' - z_n) } +  A_n\left( Z_n + \overleftarrow{Z_n} \right) e^{-j k_{zn} z_n } +
     B_n\left( Z_n - \overleftarrow{Z_n} \right) e^{+j k_{zn} z_n } = 0
     \label{eq:BC_at_left}\\
+    %
     \left( Z_n - \overrightarrow{Z_n} \right) e^{-j k_{zn} (z_{n+1} - z') } +  A_n\left( Z_n - \overrightarrow{Z_n} \right) e^{-j k_{zn} z_{n+1} } +
     B_n \left( Z_n - \overrightarrow{Z_n} \right) e^{+j k_{zn} z_{n+1} } = 0
     \label{eq:BC_at_right}
@@ -150,6 +171,7 @@ The solution of the system of two linear equations (\ref{eq:BC_val}) can be writ
 
 \begin{align}
   A_n = \frac{ c e - b f }{bd - a e}\quad , \quad
+  %
   B_n = \frac{ a f - c d }{bd - a e}
   \label{eq:gen_sol}
 \end{align}
@@ -180,12 +202,13 @@ The solution for unknowns, therefore is \cite[p. 1178]{michalski2005electromagne
     \label{eq:AnB}
   \end{align}
 \end{subequations}
-where $\overleftarrow{Gamma_n}$ and $\overrightarrow{Gamma_n}$ are the left and right looking reflection coefficients:
+where $\overleftarrow{\Gamma_n}$ and $\overrightarrow{\Gamma_n}$ are the left and right looking reflection coefficients:
 
 \begin{subequations}
   \begin{align}
   \overleftarrow{\Gamma_n} ={}& \frac{\overleftarrow{Z_n} - Z_n}{\overleftarrow{Z_n} + Z_n}
     \label{eq:R_left}\\
+    %
     \overrightarrow{\Gamma_n} ={}& \frac{\overrightarrow{Z_n} - Z_n}{\overrightarrow{Z_n} + Z_n}
       \label{eq:R_right}
   \end{align}
