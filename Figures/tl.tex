@@ -10,9 +10,7 @@
 
     %% Draw the equivalent TL
 
-    % Insert TL
-    \draw[line width=0.25mm] (-2.5,0) -- (12.5,0);
-    \draw[line width=0.25mm] (-2.5,5) -- (12.5,5);
+
     % Draw current source
     \draw[line width=0.25mm]
     (5,0) to[american current source] (5,5);
@@ -23,6 +21,10 @@
 
     % Line for section length
     \dimline[color=black]{(0,5.3)}{(10,5.3)}{$d_n$};
+
+    % Insert TL
+    \draw[line width=0.25mm] (-2.5,0) -- (12.5,0);
+    \draw[line width=0.25mm] (-2.5,5) -- (12.5,5);
 
     % Add nodes to represent TL section
     \draw [color=black, fill=white,line width=0.25mm] (0, 0) circle (0.1);
